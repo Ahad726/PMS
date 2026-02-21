@@ -11,7 +11,12 @@ namespace PMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["user"] != null)
+            {
+                Response.Write("Welcome " + Session["user"].ToString());
+            }else{
+                Response.Redirect("LoginUI.aspx");
+            }
         }
     }
 }
