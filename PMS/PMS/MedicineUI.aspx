@@ -15,15 +15,8 @@
             border-top-width: 1px;
             border-bottom: 1px solid #C0C0C0;
         }
-        .auto-style2 {
-            width: 120px;
-        }
         #Text1 {
             width: 306px;
-        }
-        .auto-style3 {
-            width: 120px;
-            height: 23px;
         }
         .auto-style4 {
             height: 23px;
@@ -52,6 +45,10 @@
         .auto-style5 {
             width: 30px;
         }
+        .auto-style9 {
+            width: 30px;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
@@ -60,57 +57,63 @@
     
         <table class="auto-style1">
             <tr>
-                <td class="auto-style3"></td>
+                <td class="auto-style4"></td>
                 <td class="auto-style4"></td>
             </tr>
             <tr>
-                <td class="auto-style2">
+                <td class="auto-style9">
                     <asp:Label ID="Label1" runat="server" Text="Medine Name"></asp:Label>
                 </td>
-                <td class="auto-style5">
+                <td class="auto-style9">
                     <asp:TextBox ID="MedNameTxt" runat="server" Height="21px" Width="290px"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="MedNameTxt" Display="Dynamic" ErrorMessage="Medicine Name required" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style2">
+                <td class="auto-style5">
                     <asp:Label ID="Label2" runat="server" Text="Group Name"></asp:Label>
                 </td>
                 <td class="auto-style5">
                     <asp:TextBox ID="GrpNameTxt" runat="server" Height="21px" Width="290px"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="GrpNameTxt" Display="Dynamic" ErrorMessage="Group Name required" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style2">
+                <td class="auto-style5">
                     <asp:Label ID="Label3" runat="server" Text="Batch No"></asp:Label>
                 </td>
                 <td class="auto-style5">
                     <asp:TextBox ID="BatchNoTxt" runat="server" Height="21px" Width="290px"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="BatchNoTxt" Display="Dynamic" ErrorMessage="Batch No required" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style3">Expiry Date</td>
+                <td class="auto-style4">Expiry Date</td>
                 <td class="auto-style4">
                     <asp:TextBox ID="ExpiryDateTxt" runat="server" TextMode="Date" Width="287px" Height="21px"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ExpiryDateTxt" Display="Dynamic" ErrorMessage="Expiry Date required" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style2">Quantity</td>
+                <td class="auto-style5">Quantity</td>
                 <td class="auto-style5">
                     <asp:TextBox ID="QuantityTxt" runat="server" Width="289px" Height="21px" TextMode="Number"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="QuantityTxt" Display="Dynamic" ErrorMessage="Quantity required" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style2">Unit Price</td>
+                <td class="auto-style5">Unit Price</td>
                 <td class="auto-style5">
                     <asp:TextBox ID="UnitPriceTxt" runat="server" Width="288px" Height="21px" TextMode="Number"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="UnitPriceTxt" Display="Dynamic" ErrorMessage="Unit Price required" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style5">&nbsp;</td>
                 <td class="auto-style5">&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style5">&nbsp;</td>
                 <td class="auto-style5">
                     <asp:Button ID="MedSaveButton" runat="server" OnClick="MedSaveButton_Click" Text="Save" Width="102px" />
                 </td>
