@@ -9,11 +9,12 @@
         .auto-style2 {
             width: 111px;
         }
-        table{
-            margin:auto;
+
+        table {
+            margin: auto;
             width: 10%;
-            border:1px black solid;
-            padding : 5px;
+            border: 1px black solid;
+            padding: 5px;
         }
     </style>
 </head>
