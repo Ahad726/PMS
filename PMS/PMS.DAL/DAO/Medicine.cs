@@ -15,5 +15,11 @@ namespace PMS.DAL.DAO
         public DateTime ExpiryDate { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
+        public bool IsDeleted { get; set; }
+
+        public Medicine()
+        {
+            IsDeleted = false;
+        }
     }
 }

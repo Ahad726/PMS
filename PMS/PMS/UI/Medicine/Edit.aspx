@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MedicineUI.aspx.cs" Inherits="PMS.MedicineUI" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Edit.aspx.cs" Inherits="PMS.UI.Medicine.Edit" %>
 
 <!DOCTYPE html>
 
@@ -115,7 +115,7 @@
             <tr>
                 <td class="auto-style5">&nbsp;</td>
                 <td class="auto-style5">
-                    <asp:Button ID="MedSaveButton" runat="server" OnClick="MedSaveButton_Click" Text="Save" Width="102px" />
+                    <asp:Button ID="MedUpdateButton" runat="server" OnClick="MedUpdateButton_Click" Text="Save" Width="102px" />
                 </td>
             </tr>
         </table>
