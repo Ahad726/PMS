@@ -137,27 +137,5 @@ namespace PMS.DAL.Gateway
             }
             return rowsDeleted;
         }
-
-        public bool IsStockAvailable(int medicineId, int requiredQuantity)
-        {
-            bool isAvailable = false;
-            using (SqlConnection con = new SqlConnection(conString))
-            {
-                string query = @"Select Quantity From Medicines Where Id=@Id";
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@Id", medicineId);
-                    con.Open();
-                    int availableQuantity = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    if (availableQuantity >= requiredQuantity)
-                    {
-                        isAvailable = true;
-                    }
-
-                }
-            }
-            return isAvailable;
-        }
     }
 }

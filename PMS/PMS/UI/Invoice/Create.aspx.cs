@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using PMS.BLL;
+using PMS.DAL.DAO;
+using PMS.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.Ajax.Utilities;
-using PMS.BLL;
-using PMS.Dto;
 
 namespace PMS.UI.Invoice
 {
@@ -15,7 +17,8 @@ namespace PMS.UI.Invoice
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            var invNumber = "INV-" + DateTime.Now.ToString("yyMMddHHmmss").PadLeft(10, '0');
+            InvoiceNoTextBox.Text = invNumber;
         }
         [WebMethod]
         public static List<DAL.DAO.Medicine> GetMedicines()
@@ -45,13 +48,11 @@ namespace PMS.UI.Invoice
         protected void SaveButton_Click(object sender, EventArgs e)
         {
             var medList = new List<DAL.DAO.Medicine>();
-            var allKeyList = Request.Form.AllKeys
-                                    .Where(key => key.StartsWith("MedicineId"))
-                                    .ToList();
+            var allKeyList = Request.Form.AllKeys.Where(key => key.StartsWith("MedicineId")).ToList();
 
             foreach (var key in allKeyList)
             {
-                var index = key.Replace("MedicineId[", "").Replace("]","");
+                var index = key.Replace("MedicineId[", "").Replace("]", "");
 
                 var medicineId = Convert.ToInt32(Request.Form["MedicineId[" + index + "]"]);
                 var quantity = Convert.ToInt32(Request.Form["Quantity[" + index + "]"]);
@@ -69,17 +70,29 @@ namespace PMS.UI.Invoice
 
                 if (!isStockAvailble)
                 {
-                    string message = "<script>alert('Insufficient Medicine stock ')</script>";
+                    var medicine = medManager.GetMedicineById(med.Id);
+                    string message = $"<script>alert('Insufficient stock for medicine: {medicine.MedicineName} , Batch No: {medicine.BatchNo}')</script>";
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", message);
                     break;
                 }
             }
 
+            var invMaster = new InvoiceMaster();
+            invMaster.InvNo = InvoiceNoTextBox.Text;
+            invMaster.Date = DateTime.Parse(DateTextBox.Text);
+            invMaster.CName = CustNameTextBox.Text;
+            invMaster.CContact = ContactTextBox.Text;
+            invMaster.Discount = Convert.ToDecimal(discountInput.Text);
+
+            var invManager = new InvoiceManager();
+            int result = invManager.CreateInvoice(invMaster, medList);
+
+
         }
 
         protected void ClearButton_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Create.aspx");
         }
     }
 }

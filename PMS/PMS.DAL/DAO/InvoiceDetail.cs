@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PMS.DAL.DAO
 {
-    public class InvoiceDetail
+    public class InvoiceDetails
     {
         public int Id { get; set; }
         public int InvoiceMasterId { get; set; }

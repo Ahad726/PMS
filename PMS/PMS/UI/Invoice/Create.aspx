@@ -97,17 +97,21 @@
                         <td colspan="4"></td>
                         <td>Sub Total</td>
                         <td id="subtotalTd" colspan="2"></td>
+
                     </tr>
                     <tr>
                         <td colspan="4"></td>
                         <td>Discount(%)</td>
                         <td colspan="2">
-                            <input type="number" id="discountInput" oninput="grandTotalCalculation()" /></td>
+                            <%--<input type="number" id="discountInput" oninput="grandTotalCalculation()" />--%>
+                            <asp:TextBox ID="discountInput" runat="server" oninput="grandTotalCalculation()"></asp:TextBox>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="4"></td>
                         <td>Grand Total</td>
                         <td id="grandTotalTd" colspan="2"></td>
+                   
                     </tr>
                 </tfoot>
             </table>

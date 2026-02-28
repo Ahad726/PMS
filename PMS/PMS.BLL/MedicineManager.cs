@@ -42,9 +42,16 @@ namespace PMS.BLL
         public bool IsMedStockAvailable(int medicineId, int requiredQuantity)
         {
             bool isAvailable = false;
-            string message = string.Empty;
             var mediGateway = new MedicineGateway();
-            return mediGateway.IsStockAvailable(medicineId, requiredQuantity);
+            var existingMedicine = mediGateway.GetMedicineById(medicineId);
+            if (existingMedicine != null)
+            {
+                if (existingMedicine.Quantity >= requiredQuantity)
+                {
+                    isAvailable = true;
+                }
+            }
+            return isAvailable;
         }
     }
 }

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InvoiceManager.cs" />
     <Compile Include="MedicineManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
