@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using PMS.DAL.DAO;
+using System.Web.Services;
+using System.Web.Script.Services;
+
 
 namespace PMS.UI.Medicine
 {

@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\InvoiceDetail.cs" />
+    <Compile Include="DAO\InvoiceMaster.cs" />
     <Compile Include="DAO\Medicine.cs" />
     <Compile Include="Gateway\MedicineGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

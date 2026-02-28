@@ -39,5 +39,12 @@ namespace PMS.BLL
             var mediGateway = new MedicineGateway();
             return mediGateway.DeleteMedicine(id);
         }
+        public bool IsMedStockAvailable(int medicineId, int requiredQuantity)
+        {
+            bool isAvailable = false;
+            string message = string.Empty;
+            var mediGateway = new MedicineGateway();
+            return mediGateway.IsStockAvailable(medicineId, requiredQuantity);
+        }
     }
 }
