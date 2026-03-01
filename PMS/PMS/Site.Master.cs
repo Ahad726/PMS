@@ -11,7 +11,20 @@ namespace PMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["user"] != null)
+            {
+                lblUser.Text = Session["user"].ToString();
+            }
+            else
+            {
+                Response.Redirect("LoginUI.aspx");
+            }
+        }
 
+        protected void Logout_Click(object sender, EventArgs e)
+        {
+            Session["user"] = null;
+            Response.Redirect("~/LoginUI.aspx");
         }
     }
 }

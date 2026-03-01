@@ -15,13 +15,13 @@ namespace PMS.UI.Medicine
     {
 
         /// <summary>
-        /// form1 control.
+        /// lblTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Label lblTitle;
 
         /// <summary>
         /// Label1 control.
@@ -159,6 +159,15 @@ namespace PMS.UI.Medicine
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
 
         /// <summary>
+        /// MedicineIdTxtBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox MedicineIdTxtBox;
+
+        /// <summary>
         /// MedUpdateButton control.
         /// </summary>
         /// <remarks>
@@ -166,5 +175,14 @@ namespace PMS.UI.Medicine
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button MedUpdateButton;
+
+        /// <summary>
+        /// MedCancelButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button MedCancelButton;
     }
 }

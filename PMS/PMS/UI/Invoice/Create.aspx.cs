@@ -17,6 +17,10 @@ namespace PMS.UI.Invoice
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["user"] == null)
+            {
+                Response.Redirect("~/LoginUI.aspx");
+            }
             var invNumber = "INV-" + DateTime.Now.ToString("yyMMddHHmmss").PadLeft(10, '0');
             InvoiceNoTextBox.Text = invNumber;
         }
@@ -54,6 +58,22 @@ namespace PMS.UI.Invoice
             {
                 var index = key.Replace("MedicineId[", "").Replace("]", "");
 
+                string medIdStr = Request.Form["MedicineId[" + index + "]"];
+                if (string.IsNullOrEmpty(medIdStr))
+                {
+                    string message = $"<script>alert('Medicine is not selected')</script>";
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", message);
+                    return;
+                }
+
+                string qtyStr = Request.Form["Quantity[" + index + "]"];
+                if (string.IsNullOrEmpty(qtyStr))
+                {
+                    string message = $"<script>alert('Quantity is required')</script>";
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", message);
+                    return;
+                }
+
                 var medicineId = Convert.ToInt32(Request.Form["MedicineId[" + index + "]"]);
                 var quantity = Convert.ToInt32(Request.Form["Quantity[" + index + "]"]);
                 var med = new DAL.DAO.Medicine();
@@ -73,7 +93,7 @@ namespace PMS.UI.Invoice
                     var medicine = medManager.GetMedicineById(med.Id);
                     string message = $"<script>alert('Insufficient stock for medicine: {medicine.MedicineName} , Batch No: {medicine.BatchNo}')</script>";
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", message);
-                    break;
+                    return;
                 }
             }
 
@@ -82,12 +102,22 @@ namespace PMS.UI.Invoice
             invMaster.Date = DateTime.Parse(DateTextBox.Text);
             invMaster.CName = CustNameTextBox.Text;
             invMaster.CContact = ContactTextBox.Text;
-            invMaster.Discount = Convert.ToDecimal(discountInput.Text);
+            invMaster.Discount = 0;
+            if (!string.IsNullOrEmpty(discountInput.Text))
+            {
+                invMaster.Discount = Convert.ToDecimal(discountInput.Text);
+            }
 
             var invManager = new InvoiceManager();
             int result = invManager.CreateInvoice(invMaster, medList);
 
+            if (result > 0)
+            {
+                string message = $"<script>alert('Invoice is created')</script>";
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", message);
+            }
 
+            discountInput.Text = string.Empty;
         }
 
         protected void ClearButton_Click(object sender, EventArgs e)

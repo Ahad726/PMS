@@ -14,8 +14,11 @@ namespace PMS.UI.Medicine
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
+            if (Session["user"] == null)
+            {
+                Response.Redirect("~/LoginUI.aspx");
+            }
+            UnitPriceTxt.Attributes["step"] = "0.1";
         }
 
         protected void MedSaveButton_Click(object sender, EventArgs e)
@@ -51,6 +54,11 @@ namespace PMS.UI.Medicine
             ExpiryDateTxt.Text = string.Empty;
             UnitPriceTxt.Text = string.Empty;
             MedNameTxt.Focus();
+        }
+
+        protected void MedCancelButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("List.aspx");
         }
     }
 }

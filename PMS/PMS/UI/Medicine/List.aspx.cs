@@ -15,7 +15,10 @@ namespace PMS.UI.Medicine
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["user"] == null)
+            {
+                Response.Redirect("~/LoginUI.aspx");
+            }
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -44,6 +47,17 @@ namespace PMS.UI.Medicine
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", message);
                 Response.Redirect("List.aspx");
             }
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Add.aspx");
+        }
+
+        protected void btnExport_Click(object sender, EventArgs e)
+        {
+            string message = "<script>alert('Export will be added soon')</script>";
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", message);
         }
     }
 }

@@ -53,3 +53,7 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 /PMS/.vs
+/PMS/*.suo
+/PMS/PMS/.vs
+/PMS/PMS.BLL/.vs
+/PMS/PMS.DAL/.vs

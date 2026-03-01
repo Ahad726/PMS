@@ -52,8 +52,19 @@ namespace PMS.DAL.Gateway
                     string detailsQuery = @"Insert into InvoiceDetails(InvoiceMasterId, MedicineId, MedName, Quantity, UnitPrice, BatchNo, ExpiryDate)
                                    values (@InvoiceMasterId, @MedicineId, @MedName, @Quantity, @UnitPrice, @BatchNo, @ExpiryDate)";
 
+                    string medQtyUpdateQuery = @"Update Medicines set Quantity = Quantity-@Qty Where Id = @MedId and Quantity >=@Qty;";
+
                     foreach (var medDetails in invDetailsList)
                     {
+                        using (SqlCommand cmd = new SqlCommand(medQtyUpdateQuery, con, tran))
+                        {
+                            cmd.Parameters.AddWithValue("@Qty", medDetails.Quantity);
+                            cmd.Parameters.AddWithValue("@MedId", medDetails.MedicineId);
+
+                            rowsSaved += cmd.ExecuteNonQuery();
+                        }
+
+
                         using (SqlCommand detailsCmd = new SqlCommand(detailsQuery, con, tran))
                         {
                             detailsCmd.Parameters.AddWithValue("@InvoiceMasterId", invMasterId);

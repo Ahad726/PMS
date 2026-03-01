@@ -12,6 +12,11 @@ namespace PMS.UI.Medicine
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["user"] == null)
+            {
+                Response.Redirect("~/LoginUI.aspx");
+            }
             if (!IsPostBack)
             {
                 string id = Request.QueryString["id"];
@@ -23,6 +28,7 @@ namespace PMS.UI.Medicine
                     var medicine = medicineManager.GetMedicineById(medicineId);
                     if (medicine != null)
                     {
+                        MedicineIdTxtBox.Text = medicine.Id.ToString();
                         MedNameTxt.Text = medicine.MedicineName;
                         GrpNameTxt.Text = medicine.GroupName;
                         BatchNoTxt.Text = medicine.BatchNo;
@@ -30,6 +36,8 @@ namespace PMS.UI.Medicine
                         QuantityTxt.Text = medicine.Quantity.ToString();
                         UnitPriceTxt.Text = medicine.UnitPrice.ToString("F2");
                     }
+
+                    UnitPriceTxt.Attributes["step"] = "0.1";
                 }
             }
         }
@@ -37,8 +45,9 @@ namespace PMS.UI.Medicine
         protected void MedUpdateButton_Click(object sender, EventArgs e)
         {
             var medMenager = new MedicineManager();
-            int savedRowCount = medMenager.InsertMedicine(new DAL.DAO.Medicine
+            int savedRowCount = medMenager.UpdateMedicine(new DAL.DAO.Medicine
             {
+                Id = Convert.ToInt32(MedicineIdTxtBox.Text),
                 MedicineName = MedNameTxt.Text,
                 GroupName = GrpNameTxt.Text,
                 BatchNo = BatchNoTxt.Text,
@@ -54,6 +63,11 @@ namespace PMS.UI.Medicine
             {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Medicine save Failed')</script>");
             }
+        }
+
+        protected void MedCancelButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("List.aspx");
         }
     }
 }
