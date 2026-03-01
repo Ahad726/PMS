@@ -1,4 +1,4 @@
-﻿<%@ Page Title="All Medicines" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="List.aspx.cs" Inherits="PMS.UI.Medicine.List" %>
+﻿<%@ Page Title="All Medicines" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="List.aspx.cs" Inherits="PMS.UI.Medicine.List" EnableEventValidation="false" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <style>

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using PMS.DAL.DAO;
 using System.Web.Services;
 using System.Web.Script.Services;
+using System.IO;
 
 
 namespace PMS.UI.Medicine
@@ -56,8 +57,27 @@ namespace PMS.UI.Medicine
 
         protected void btnExport_Click(object sender, EventArgs e)
         {
-            string message = "<script>alert('Export will be added soon')</script>";
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", message);
+            //string message = "<script>alert('Export will be added soon')</script>";
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", message);
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment; filename=Medicines.xls");
+            Response.ContentType = "application/excel";
+
+            StringWriter stringWriter = new StringWriter();
+            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter);
+
+
+            var lastColumn = medicineGridView.Columns.Count - 1;
+            medicineGridView.Columns[lastColumn].Visible = false;
+
+
+            medicineGridView.RenderControl(htmlTextWriter);
+            Response.Write(stringWriter.ToString());
+            Response.End();
+        }
+
+        public override void VerifyRenderingInServerForm(Control control)
+        {
         }
     }
 }
