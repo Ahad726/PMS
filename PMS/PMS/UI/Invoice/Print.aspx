@@ -56,7 +56,6 @@
                             <asp:BoundField DataField="ExpiryDate" HeaderText="Expiry Date" DataFormatString="{0:dd-MMM-yyyy}" />
                             <asp:BoundField DataField="Quantity" HeaderText="Quantity" />
                             <asp:BoundField DataField="UnitPrice" HeaderText="Price" />
-                            <%-- <asp:BoundField DataField="Total" HeaderText="Total" />--%>
                         </Columns>
                     </asp:GridView>
                     <table>
