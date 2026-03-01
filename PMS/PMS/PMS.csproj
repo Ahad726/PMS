@@ -135,6 +135,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="UI\Invoice\Create.aspx" />
+    <Content Include="UI\Invoice\Print.aspx" />
     <Content Include="UI\Medicine\Add.aspx" />
     <Content Include="UI\Medicine\Edit.aspx" />
     <Content Include="UI\Medicine\List.aspx" />
@@ -199,6 +200,13 @@
     </Compile>
     <Compile Include="UI\Invoice\Create.aspx.designer.cs">
       <DependentUpon>Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Invoice\Print.aspx.cs">
+      <DependentUpon>Print.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Invoice\Print.aspx.designer.cs">
+      <DependentUpon>Print.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Medicine\Add.aspx.cs">
       <DependentUpon>Add.aspx</DependentUpon>

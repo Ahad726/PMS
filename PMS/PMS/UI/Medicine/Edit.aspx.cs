@@ -57,11 +57,11 @@ namespace PMS.UI.Medicine
             });
             if (savedRowCount > 0)
             {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Medicine saved successfully')</script>");
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Medicine updated successfully')</script>");
             }
             else
             {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Medicine save Failed')</script>");
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Medicine update Failed')</script>");
             }
         }
 

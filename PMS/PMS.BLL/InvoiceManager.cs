@@ -56,5 +56,18 @@ namespace PMS.BLL
 
             return result;
         }
+
+        public InvoiceMaster GetInvoiceById(int id)
+        {
+            var invGateway = new InvoiceGateway();
+            return invGateway.GetInvoiceMasterById(id);
+        }
+
+        public List<InvoiceDetails> GetInvoiceDetailsByMasterId(int masterId)
+        {
+            var invGateway = new InvoiceGateway();
+            return invGateway.GetInvoiceDetailsByMasterId(masterId);
+        }
     }
+
 }

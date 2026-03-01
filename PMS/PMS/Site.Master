@@ -57,7 +57,7 @@
                     <asp:Label ID="lblUser" runat="server" Text="Admin"></asp:Label>
                     <span>&nbsp</span>
                     <span>&nbsp</span>
-                    <asp:LinkButton runat="server" CssClass="lgout" OnClick="Logout_Click">Logout</asp:LinkButton>
+                    <asp:LinkButton runat="server" CssClass="lgout" OnClick="Logout_Click" CausesValidation="false">Logout</asp:LinkButton>
                 </div>
             </div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">

@@ -109,15 +109,18 @@ namespace PMS.UI.Invoice
             }
 
             var invManager = new InvoiceManager();
-            int result = invManager.CreateInvoice(invMaster, medList);
+            int id = invManager.CreateInvoice(invMaster, medList);
 
-            if (result > 0)
-            {
-                string message = $"<script>alert('Invoice is created')</script>";
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", message);
-            }
+            //if (result > 0)
+            //{
+            //    string message = $"<script>alert('Invoice is created')</script>";
+            //    Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", message);
+            //}
 
-            discountInput.Text = string.Empty;
+            //discountInput.Text = string.Empty;
+
+            Response.Redirect("Print.aspx?id=" + id);
+
         }
 
         protected void ClearButton_Click(object sender, EventArgs e)

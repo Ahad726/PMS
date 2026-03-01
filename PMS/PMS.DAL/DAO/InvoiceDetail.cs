@@ -16,6 +16,5 @@ namespace PMS.DAL.DAO
         public decimal UnitPrice { get; set; }
         public string BatchNo { get; set; }
         public DateTime ExpiryDate { get; set; }
-
     }
 }

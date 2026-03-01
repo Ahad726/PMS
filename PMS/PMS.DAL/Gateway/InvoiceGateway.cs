@@ -21,6 +21,7 @@ namespace PMS.DAL.Gateway
         public int CreateInvoice(InvoiceMaster invoiceMaster, List<InvoiceDetails> invDetailsList)
         {
             int rowsSaved = 0;
+            int invMasterId = 0;
 
             using (SqlConnection con = new SqlConnection(conString))
             {
@@ -34,7 +35,6 @@ namespace PMS.DAL.Gateway
                                     values (@InvNo, @Date, @CName, @CContact, @SubTotal, @Discount, @GrandTotal);
                                      Select SCOPE_IDENTITY();";
 
-                    int invMasterId;
 
                     using (SqlCommand cmd = new SqlCommand(query, con, tran))
                     {
@@ -87,7 +87,68 @@ namespace PMS.DAL.Gateway
                 }
             }
 
-            return rowsSaved;
+            //return rowsSaved;
+            return invMasterId;
+        }
+
+        public InvoiceMaster GetInvoiceMasterById(int id)
+        {
+            InvoiceMaster inv = null;
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                string query = @"Select * From InvoiceMaster Where Id=@Id";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    con.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            inv = new InvoiceMaster();
+                            inv.Id = Convert.ToInt32(reader["Id"]);
+                            inv.InvNo = Convert.ToString(reader["InvNo"]);
+                            inv.Date = Convert.ToDateTime(reader["Date"]);
+                            inv.CName = Convert.ToString(reader["CName"]);
+                            inv.CContact = Convert.ToString(reader["CContact"]);
+                            inv.SubTotal = Convert.ToDecimal(reader["SubTotal"]);
+                            inv.Discount = Convert.ToDecimal(reader["Discount"]);
+                            inv.GrandTotal = Convert.ToDecimal(reader["GrandTotal"]);
+
+                        }
+                    }
+                }
+            }
+            return inv;
+        }
+
+        public List<InvoiceDetails> GetInvoiceDetailsByMasterId(int masterId)
+        {
+            var invDetailsList = new List<InvoiceDetails>();
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                string query = @"Select * From InvoiceDetails Where InvoiceMasterId = @invMasterId";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@invMasterId", masterId);
+                    con.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var invDetails = new InvoiceDetails();
+                            invDetails.MedName = Convert.ToString(reader["MedName"]);
+                            invDetails.Quantity = Convert.ToInt32(reader["Quantity"]);
+                            invDetails.UnitPrice = Convert.ToDecimal(reader["UnitPrice"]);
+                            invDetails.ExpiryDate = Convert.ToDateTime(reader["ExpiryDate"]);
+                            invDetails.BatchNo = Convert.ToString(reader["BatchNo"]);
+
+                            invDetailsList.Add(invDetails);
+                        }
+                    }
+                }
+            }
+            return invDetailsList;
         }
     }
 }
